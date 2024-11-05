@@ -46,7 +46,7 @@ function App() {
 				<Route index element={<HomePageProfessores />} />
 			</Route>
 
-			<Route path="/alunos" element={<IndexAdmin />}>
+			<Route path="/admin" element={<IndexAdmin />}>
 				<Route index element={<HomePageAdmin />} />
 			</Route>
 

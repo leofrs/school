@@ -31,23 +31,25 @@ function LoginPage() {
 			const professor = "professor";
 			const admin = "admin";
 
-			if (user === aluno) {
+			if (user === aluno && password === "user") {
 				setUser(aluno);
 				navigate("/aluno");
 				return;
 			}
 
-			if (user === professor) {
+			if (user === professor && password === "professor") {
 				setUser(professor);
 				navigate("/professor");
 				return;
 			}
 
-			if (user === admin) {
+			if (user === admin && password === "admin") {
 				setUser(admin);
 				navigate("/admin");
 				return;
 			}
+
+			alert("Usuário ou senha incorretos");
 		} catch (error) {
 			console.log(error);
 		}
