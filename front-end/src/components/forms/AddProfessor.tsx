@@ -1,25 +1,34 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { z } from "zod";
 
-type Inputs = {
-  nome: string;
-  email: string;
-  password: string;
-  telefone: number;
-  genero: string;
-  formacao: string;
-};
+const schema = z.object({
+  nome: z.string().min(2),
+  email: z.string().email(),
+  password: z.string().min(6),
+  telefone: z.number().min(11),
+  genero: z.string().min(2),
+  formacao: z.string().min(2),
+});
+
+type Inputs = z.infer<typeof schema>;
 
 function AddProfessorForm() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<Inputs>({
+    mode: "onBlur",
+    resolver: zodResolver(schema),
+  });
+
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="p-4 md:p-5">
       <div className="grid gap-4 mb-4 grid-cols-2">
+        {/* Nome */}
         <div className="col-span-2">
           <label
             htmlFor="nome"
@@ -34,11 +43,7 @@ function AddProfessorForm() {
             type="text"
             placeholder="Digite seu nome"
           />
-          {errors.nome && (
-            <span className="text-sm text-red-500">
-              Este campo é obrigatório
-            </span>
-          )}
+          {errors.nome?.message}
         </div>
 
         {/* Email */}
@@ -56,11 +61,7 @@ function AddProfessorForm() {
             type="email"
             placeholder="Digite seu e-mail"
           />
-          {errors.email && (
-            <span className="text-sm text-red-500">
-              Este campo é obrigatório
-            </span>
-          )}
+          {errors.email?.message}
         </div>
 
         {/* Senha */}
@@ -78,11 +79,7 @@ function AddProfessorForm() {
             type="password"
             placeholder="Digite sua senha"
           />
-          {errors.password && (
-            <span className="text-sm text-red-500">
-              Este campo é obrigatório
-            </span>
-          )}
+          {errors.password?.message}
         </div>
 
         {/* Telefone */}
@@ -100,11 +97,7 @@ function AddProfessorForm() {
             type="tel"
             placeholder="Digite seu telefone"
           />
-          {errors.telefone && (
-            <span className="text-sm text-red-500">
-              Este campo é obrigatório
-            </span>
-          )}
+          {errors.telefone?.message}
         </div>
 
         {/* Gênero */}
@@ -122,11 +115,7 @@ function AddProfessorForm() {
             type="text"
             placeholder="Digite seu gênero"
           />
-          {errors.genero && (
-            <span className="text-sm text-red-500">
-              Este campo é obrigatório
-            </span>
-          )}
+          {errors.genero?.message}
         </div>
 
         {/* Formação */}
@@ -144,11 +133,7 @@ function AddProfessorForm() {
             type="text"
             placeholder="Digite sua formação"
           />
-          {errors.formacao && (
-            <span className="text-sm text-red-500">
-              Este campo é obrigatório
-            </span>
-          )}
+          {errors.formacao?.message}
         </div>
 
         {/* Botão de Submissão */}
