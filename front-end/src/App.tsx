@@ -10,7 +10,7 @@ import IndexAdmin from "./pages/admin/indexAdmin";
 import HomePageAdmin from "./pages/admin/HomePageAdmin";
 import ProfessorPageAdmin from "./pages/admin/ProfessorPageAdmin";
 import AlunoPageAdmin from "./pages/admin/AlunoPageAdmin";
-import SalasPageAdmin from "./pages/admin/SalasPagaAdmin";
+import SalasPageAdmin from "./pages/admin/SalasPageAdmin";
 
 function App() {
   const navigate = useNavigate();
