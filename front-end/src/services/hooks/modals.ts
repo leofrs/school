@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Professor } from "../../db/professores";
+import { Alunos } from "../../db/alunos";
 
 export const ModalsHooks = () => {
   const [isModalLoginOpen, setIsModalLoginOpen] = useState<boolean>(false);
@@ -7,12 +8,16 @@ export const ModalsHooks = () => {
   const [selectedProfessor, setSelectedProfessor] = useState<Professor | null>(
     null
   );
+  const [selectedAluno, setSelectedAluno] = useState<Alunos | null>(null);
 
-  const handleProfessorClick = (professor: Professor) => {
-    setSelectedProfessor(professor);
+  const handleProfessorClick = (professores: Professor) => {
+    setSelectedProfessor(professores);
     setIsModalOpen(true);
   };
-
+  const handleAlunoClick = (alunos: Alunos) => {
+    setSelectedAluno(alunos);
+    setIsModalOpen(true);
+  };
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedProfessor(null);
@@ -28,5 +33,7 @@ export const ModalsHooks = () => {
     selectedProfessor,
     handleProfessorClick,
     closeModal,
+    selectedAluno,
+    handleAlunoClick,
   };
 };

@@ -3,6 +3,10 @@ import NavbarAdmin from "../../components/navbarAdmin";
 
 const HomePageAdmin = () => {
   const navigate = useNavigate();
+  const handleClick = () => {
+    localStorage.clear();
+    navigate("/");
+  };
 
   return (
     <main className="flex">
@@ -18,6 +22,7 @@ const HomePageAdmin = () => {
           <button
             type="button"
             className=" bg-[#509CDB] px-6 py-1 rounded-md text-white"
+            onClick={() => handleClick()}
           >
             Sair
           </button>
@@ -45,7 +50,10 @@ const HomePageAdmin = () => {
             </div>
 
             <div className="p-8 flex flex-col gap-4">
-              <h2 className="text-xl font-semibold cursor-pointer hover:text-blue-500">
+              <h2
+                className="text-xl font-semibold cursor-pointer hover:text-blue-500"
+                onClick={() => navigate("/admin/alunos")}
+              >
                 Adicione ou remova alunos
               </h2>
               <p>
@@ -57,7 +65,10 @@ const HomePageAdmin = () => {
             </div>
 
             <div className="p-8 flex flex-col gap-4">
-              <h2 className="text-xl font-semibold cursor-pointer hover:text-blue-500">
+              <h2
+                className="text-xl font-semibold cursor-pointer hover:text-blue-500"
+                onClick={() => navigate("/admin/salas")}
+              >
                 Adicione ou remova salas
               </h2>
               <p>

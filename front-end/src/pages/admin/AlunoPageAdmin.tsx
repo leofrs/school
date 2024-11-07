@@ -1,25 +1,26 @@
 import AddProfessorForm from "../../components/forms/AddProfessor";
 import AddProfessorModal from "../../components/modals/addProfessor";
 import NavbarAdmin from "../../components/navbarAdmin";
-import { professoresMock } from "../../db/professores";
+import { alunosMock } from "../../db/alunos";
 import { ModalsHooks } from "../../services/hooks/modals";
 import InfoProfessor from "../../components/modals/infoProfessor";
+import InfoAluno from "../../components/modals/infoAluno";
 import { useState } from "react";
 
-const ProfessorPageAdmin = () => {
+const AlunoPageAdmin = () => {
   const {
     openLoginModal,
     isModalLoginOpen,
     closeLoginModal,
     isModalOpen,
     closeModal,
-    handleProfessorClick,
     selectedProfessor,
+    selectedAluno,
+    handleAlunoClick,
   } = ModalsHooks();
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredProfessores, setFilteredProfessores] =
-    useState(professoresMock);
+  const [filteredAlunos, setFilteredAlunos] = useState(alunosMock);
 
   const handleSearchProfessor = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -27,12 +28,12 @@ const ProfessorPageAdmin = () => {
     const value = event.target.value;
     setSearchTerm(value);
 
-    const filtered = professoresMock.filter(
-      (professor) =>
-        professor.nome.toLowerCase().includes(value.toLowerCase()) ||
-        professor.email.toLowerCase().includes(value.toLowerCase())
+    const filtered = alunosMock.filter(
+      (aluno) =>
+        aluno.nome.toLowerCase().includes(value.toLowerCase()) ||
+        aluno.email.toLowerCase().includes(value.toLowerCase())
     );
-    setFilteredProfessores(filtered);
+    setFilteredAlunos(filtered);
   };
 
   return (
@@ -41,7 +42,7 @@ const ProfessorPageAdmin = () => {
 
       <section className="w-full min-h-screen">
         <div className="min-w-full h-20 bg-[#FCFAFA] flex items-center m-auto justify-around px-4">
-          <p className="w-3/4 text-left italic text-gray-500">Professores</p>
+          <p className="w-3/4 text-left italic text-gray-500">Alunos</p>
 
           <div className="flex gap-8 items-center w-full justify-end">
             <button
@@ -49,7 +50,7 @@ const ProfessorPageAdmin = () => {
               className=" bg-[#509CDB] px-6 py-1 rounded-md text-white"
               onClick={() => openLoginModal()}
             >
-              Adiconar Professor
+              Adiconar Aluno
             </button>
 
             <button
@@ -65,20 +66,20 @@ const ProfessorPageAdmin = () => {
           <input
             type="text"
             name="search"
-            placeholder="Encontrar Professor"
             value={searchTerm}
             onChange={handleSearchProfessor}
+            placeholder="Encontrar Aluno"
             className="w-full h-10 px-4 rounded-md border-2 border-[#509CDB] focus:outline-none focus:border-[#509CDB]"
           />
 
           <div className="w-full min-h-[500px] flex flex-col items-center justify-center gap-4 bg-[#FCFAFA] rounded-sm">
             <div className="w-full max-h-[500px] flex flex-col overflow-y-auto items-center justify-between px-4 py-2 bg-[#FCFAFA] rounded-md">
-              {filteredProfessores.length > 0 ? (
-                filteredProfessores.map((professor) => (
+              {filteredAlunos && filteredAlunos.length > 0 ? (
+                filteredAlunos.map((aluno) => (
                   <div
-                    key={professor.email}
+                    key={aluno.email}
                     className="w-full min-h-[150px] flex items-center justify-between px-4 py-2 bg-[#FCFAFA] rounded-md cursor-pointer"
-                    onClick={() => handleProfessorClick(professor)}
+                    onClick={() => handleAlunoClick(aluno)}
                   >
                     <div className="flex gap-4 items-center">
                       <img
@@ -87,19 +88,15 @@ const ProfessorPageAdmin = () => {
                         className="w-10 h-10 rounded-full"
                       />
                       <div className="flex flex-col gap-1">
-                        <h4 className="text-lg font-medium">
-                          {professor.nome}
-                        </h4>
-                        <p className="text-sm text-gray-500">
-                          {professor.email}
-                        </p>
+                        <h4 className="text-lg font-medium">{aluno.nome}</h4>
+                        <p className="text-sm text-gray-500">{aluno.email}</p>
                       </div>
                     </div>
                   </div>
                 ))
               ) : (
                 <h4 className="text-2xl font-medium text-gray-500">
-                  Nenhum professor foi encontrado
+                  Nenhum aluno foi adicionado
                 </h4>
               )}
             </div>
@@ -114,7 +111,11 @@ const ProfessorPageAdmin = () => {
       {isModalOpen && selectedProfessor && (
         <InfoProfessor professor={selectedProfessor} onClose={closeModal} />
       )}
+
+      {isModalOpen && selectedAluno && (
+        <InfoAluno aluno={selectedAluno} onClose={closeModal} />
+      )}
     </main>
   );
 };
-export default ProfessorPageAdmin;
+export default AlunoPageAdmin;
