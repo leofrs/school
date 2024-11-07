@@ -72,17 +72,16 @@ const ProfessorPageAdmin = () => {
           />
 
           <div className="w-full min-h-[500px] flex flex-col items-center justify-center gap-4 bg-[#FCFAFA] rounded-sm">
-            <div className="w-full max-h-[500px] flex flex-col overflow-y-auto items-center justify-between px-4 py-2 bg-[#FCFAFA] rounded-md">
+            <div className="w-full max-h-[500px] flex flex-col gap-1 overflow-y-auto items-center justify-between px-4 py-2 bg-[#FCFAFA] rounded-md">
               {filteredProfessores.length > 0 ? (
                 filteredProfessores.map((professor) => (
                   <div
                     key={professor.email}
-                    className="w-full min-h-[150px] flex items-center justify-between px-4 py-2 bg-[#FCFAFA] rounded-md cursor-pointer"
-                    onClick={() => handleProfessorClick(professor)}
+                    className="w-full min-h-[100px] flex items-center justify-between px-4 py-2  border border-b rounded-md"
                   >
                     <div className="flex gap-4 items-center">
                       <img
-                        src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                        src={professor.img}
                         alt="profile"
                         className="w-10 h-10 rounded-full"
                       />
@@ -94,6 +93,28 @@ const ProfessorPageAdmin = () => {
                           {professor.email}
                         </p>
                       </div>
+                    </div>
+
+                    <div className="flex gap-4">
+                      <button
+                        type="button"
+                        onClick={() => handleProfessorClick(professor)}
+                        className="rounded-md border border-gray-300 px-4"
+                      >
+                        Info
+                      </button>
+                      <button
+                        type="button"
+                        className="rounded-md border border-gray-300 px-4"
+                      >
+                        Editar
+                      </button>
+                      <button
+                        type="button"
+                        className="rounded-md border border-gray-300 px-4"
+                      >
+                        Excluir
+                      </button>
                     </div>
                   </div>
                 ))

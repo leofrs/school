@@ -10,18 +10,19 @@ import IndexAdmin from "./pages/admin/indexAdmin";
 import HomePageAdmin from "./pages/admin/HomePageAdmin";
 import ProfessorPageAdmin from "./pages/admin/ProfessorPageAdmin";
 import AlunoPageAdmin from "./pages/admin/AlunoPageAdmin";
-import SalasPageAdmin from "./pages/admin/SalasPageAdmin";
+import Escola from "./pages/admin/EscolaPageAdmin";
 
 function App() {
   const navigate = useNavigate();
-  const location = useLocation();
   const userLocal = localStorage.getItem("user");
-
+  const location = useLocation();
   useEffect(() => {
     const user = localStorage.getItem("user");
 
-    if (!user && location.pathname !== "/") {
+    if (!user) {
       navigate("/");
+    } else if (user === "admin" && !location.pathname.startsWith("/admin")) {
+      navigate("/admin");
     }
   }, [navigate, location]);
 
@@ -40,7 +41,7 @@ function App() {
           <Route index element={<HomePageAdmin />} />
           <Route path="professores" element={<ProfessorPageAdmin />} />
           <Route path="alunos" element={<AlunoPageAdmin />} />
-          <Route path="salas" element={<SalasPageAdmin />} />
+          <Route path="escola" element={<Escola />} />
         </Route>
       ) : (
         <Route path="/login" element={<LoginPage />} />

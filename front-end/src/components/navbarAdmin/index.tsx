@@ -46,17 +46,11 @@ const NavbarAdmin = () => {
           </li>
           <li
             className={`${isActive(
-              "/admin/salas"
+              "/admin/escola"
             )} w-full p-2 rounded-md cursor-pointer`}
-            onClick={() => navigate("/admin/salas")}
+            onClick={() => navigate("/admin/escola")}
           >
-            Salas
-          </li>
-          <li className="border rounded-md w-full p-2 cursor-pointer">
-            Provas
-          </li>
-          <li className="border rounded-md w-full p-2 cursor-pointer">
-            Perfil
+            Escola
           </li>
         </ul>
       </nav>

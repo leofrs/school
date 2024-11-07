@@ -67,9 +67,9 @@ const HomePageAdmin = () => {
             <div className="p-8 flex flex-col gap-4">
               <h2
                 className="text-xl font-semibold cursor-pointer hover:text-blue-500"
-                onClick={() => navigate("/admin/salas")}
+                onClick={() => navigate("/admin/escola")}
               >
-                Adicione ou remova salas
+                Obtenha mais informações
               </h2>
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum
